@@ -34,3 +34,10 @@ jobs:
     - name: Run script
       run: |
         python stocks.py
+    - name: Commit results.txt
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add results.txt
+        git commit -m "Update results.txt" -a
+        git push "https://makma:${{ secrets.GITHUB_PERSONAL_TOKEN }}@github.com/makma/stocks-movement.git" HEAD:master --follow-tags
