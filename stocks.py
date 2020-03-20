@@ -14,7 +14,8 @@ class stockResult():
         self.stockSymbol = stockSymbol
         self.percentageMovement = percentageMovement
 
-@limits(calls=1, period=1)
+
+@limits(calls=1, period=1) # slow down for rate limiting
 def get_all_stocks_data():
     today = datetime.datetime.today()
     data = yf.download(stockSymbols, start="2019-11-29", end=today)
