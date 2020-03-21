@@ -4,6 +4,7 @@ import numpy as np
 from ratelimit import limits
 import os
 import math
+from template import *
 
 startDate = "2019-12-01"
 endDate = datetime.date.today()
@@ -24,7 +25,7 @@ def get_all_stocks_data():
     return data
 
 
-resultsFileName = "results.md"
+resultsFileName = "docs/index.html"
 if os.path.exists(resultsFileName):
     os.remove(resultsFileName)    
 
@@ -42,12 +43,23 @@ for stockSymbol in stockSymbols.split():
 
 stockResults.sort(key=lambda x: x.percentageMovement)
 
+documentBody = ''
+
 with open(resultsFileName, "a") as resultsFile:
-    resultsFile.write('Diff between {} and {} generated at {} <br/>'.format(startDate, endDate, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+    documentBody += ('<h1>Diff between {} and {} generated at {} </h1> \n'.format(startDate, endDate, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+
+documentBody += "<ul> \n"
 
 for result in stockResults:
     roundedPercentageMovement = np.round(result.percentageMovement, 2)
     print('{} {}%'.format(result.stockSymbol, roundedPercentageMovement))
-    with open(resultsFileName, "a") as resultsFile:
-        markUrl = 'https://www.tradingview.com/symbols/{}/?target=_blank'.format(result.stockSymbol)
-        resultsFile.write('[{}]({}) {}% <br/>'.format(result.stockSymbol, markUrl, roundedPercentageMovement))
+
+    documentBody += "<li>"
+    markUrl = 'https://www.tradingview.com/symbols/{}/'.format(result.stockSymbol)
+    documentBody += '<a href="{}">{}</a> {}%'.format(markUrl, result.stockSymbol, roundedPercentageMovement)
+    documentBody += "</li> \n"
+    
+documentBody += "</ul> \n"
+
+with open(resultsFileName, "a") as resultsFile:
+    resultsFile.write(template.format(documentBody))
