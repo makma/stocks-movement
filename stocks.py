@@ -47,7 +47,7 @@ heading = ''
 documentBody = ''
 
 with open(resultsFileName, "a") as resultsFile:
-    heading += ('<h1>Diff between {} and {} generated at {} </h1> \n'.format(startDate, endDate, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+    heading += ('<h1>Diff between {} and {} generated at {} UTC</h1> \n'.format(startDate, endDate, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
 documentBody += "<ul> \n"
 
@@ -56,8 +56,7 @@ for result in stockResults:
     print('{} {}%'.format(result.stockSymbol, roundedPercentageMovement))
 
     documentBody += "<li>"
-    markUrl = 'https://www.tradingview.com/symbols/{}/'.format(result.stockSymbol)
-    documentBody += '<a href="{}">{}</a> {}%'.format(markUrl, result.stockSymbol, roundedPercentageMovement)
+    documentBody += '<button onclick="renderChart(`{}`)">{}</button> {}%"'.format(result.stockSymbol, result.stockSymbol, roundedPercentageMovement)
     documentBody += "</li> \n"
     
 documentBody += "</ul> \n"
