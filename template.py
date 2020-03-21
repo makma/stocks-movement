@@ -6,16 +6,29 @@ template = """<!DOCTYPE html>
 <style>
   .tradingview-widget-container {{
     position: sticky;
-    height: 0;
-    top: 60px;
-    right: 60px;
-
+    top: 20px;
   }}
+  .stocks-view {{
+    display: flex;
+    flex-wrap: nowrap;
+  }}
+  .stocks-listing {{
+    width: 200px;
+    flex-wrap: nowrap;
+  }}
+  .stocks-graph {{
+    flex-wrap: nowrap;
+  }}  
 </style>
 </head>
 
 <body>
 {}
+<div class="stocks-view">
+  <div class="stocks-listing">
+  {}
+  </div>
+  <div class="stocks-graph"
   <!-- TradingView Widget BEGIN -->
   <div class="tradingview-widget-container">
     <div id="tradingview_63a66"></div>
@@ -41,7 +54,8 @@ template = """<!DOCTYPE html>
     </script>
   </div>
   <!-- TradingView Widget END -->
-{}
+  </div>
+</div>
 </body>
 
 </html>"""
