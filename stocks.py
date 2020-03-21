@@ -56,7 +56,7 @@ for result in stockResults:
     print('{} {}%'.format(result.stockSymbol, roundedPercentageMovement))
 
     documentBody += "<li>"
-    documentBody += '<button onclick="renderChart(`{}`)">{}</button> {}%"'.format(result.stockSymbol, result.stockSymbol, roundedPercentageMovement)
+    documentBody += '<button onclick="renderChart(`{}`)">{}</button> {}%'.format(result.stockSymbol, result.stockSymbol, roundedPercentageMovement)
     documentBody += "</li> \n"
     
 documentBody += "</ul> \n"
