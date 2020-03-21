@@ -43,7 +43,7 @@ for stockSymbol in stockSymbols.split():
 stockResults.sort(key=lambda x: x.percentageMovement)
 
 with open(resultsFileName, "a") as resultsFile:
-    resultsFile.write('Diff between {} and {} <br/>'.format(startDate, endDate))
+    resultsFile.write('Diff between {} and {} generated at {} <br/>'.format(startDate, endDate, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
 for result in stockResults:
     roundedPercentageMovement = np.round(result.percentageMovement, 2)
