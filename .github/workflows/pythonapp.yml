@@ -36,7 +36,7 @@ jobs:
     - name: Run script
       run: |
         python stocks.py
-    - name: Commit docs/index.html
+    - name: Deploy page
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
