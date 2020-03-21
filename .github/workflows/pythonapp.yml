@@ -40,6 +40,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add docs/index.html
+        git add docs/index.html -f
         git commit -m "Update docs/index.html" -a
-        git push "https://makma:${{ secrets.GITHUB_PERSONAL_TOKEN }}@github.com/makma/stocks-movement.git" HEAD:master --follow-tags -f
+        git push "https://makma:${{ secrets.GITHUB_PERSONAL_TOKEN }}@github.com/makma/stocks-movement.git" HEAD:master --follow-tags
