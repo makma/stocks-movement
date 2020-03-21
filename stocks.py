@@ -43,10 +43,11 @@ for stockSymbol in stockSymbols.split():
 
 stockResults.sort(key=lambda x: x.percentageMovement)
 
+heading = ''
 documentBody = ''
 
 with open(resultsFileName, "a") as resultsFile:
-    documentBody += ('<h1>Diff between {} and {} generated at {} </h1> \n'.format(startDate, endDate, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+    heading += ('<h1>Diff between {} and {} generated at {} </h1> \n'.format(startDate, endDate, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
 documentBody += "<ul> \n"
 
@@ -62,4 +63,4 @@ for result in stockResults:
 documentBody += "</ul> \n"
 
 with open(resultsFileName, "a") as resultsFile:
-    resultsFile.write(template.format(documentBody))
+    resultsFile.write(template.format(heading, documentBody))
