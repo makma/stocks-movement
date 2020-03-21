@@ -24,7 +24,7 @@ def get_all_stocks_data():
     return data
 
 
-resultsFileName = "results.txt"
+resultsFileName = "results.md"
 if os.path.exists(resultsFileName):
     os.remove(resultsFileName)    
 
@@ -43,10 +43,11 @@ for stockSymbol in stockSymbols.split():
 stockResults.sort(key=lambda x: x.percentageMovement)
 
 with open(resultsFileName, "a") as resultsFile:
-    resultsFile.write('Diff between {} and {} \n'.format(startDate, endDate))
+    resultsFile.write('Diff between {} and {} <br/>'.format(startDate, endDate))
 
 for result in stockResults:
     roundedPercentageMovement = np.round(result.percentageMovement, 2)
     print('{} {}%'.format(result.stockSymbol, roundedPercentageMovement))
     with open(resultsFileName, "a") as resultsFile:
-        resultsFile.write('{} {}% \n'.format(result.stockSymbol, roundedPercentageMovement))
+        markUrl = 'https://www.tradingview.com/symbols/{}/'.format(result.stockSymbol)
+        resultsFile.write('[{}]({}) {}% <br/>'.format(result.stockSymbol, markUrl, roundedPercentageMovement))
