@@ -49,5 +49,5 @@ for result in stockResults:
     roundedPercentageMovement = np.round(result.percentageMovement, 2)
     print('{} {}%'.format(result.stockSymbol, roundedPercentageMovement))
     with open(resultsFileName, "a") as resultsFile:
-        markUrl = 'https://www.tradingview.com/symbols/{}/'.format(result.stockSymbol)
+        markUrl = 'https://www.tradingview.com/symbols/{}/?target=_blank'.format(result.stockSymbol)
         resultsFile.write('[{}]({}) {}% <br/>'.format(result.stockSymbol, markUrl, roundedPercentageMovement))
