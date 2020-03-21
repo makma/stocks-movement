@@ -46,7 +46,7 @@ template = """<!DOCTYPE html>
       "width": 980,
       "height": 610,
       "symbol": symbol,
-      "interval": "D",
+      "interval": "180",
       "timezone": "Etc/UTC",
       "theme": "light",
       "style": "1",
@@ -58,7 +58,7 @@ template = """<!DOCTYPE html>
     }}
     );
   }}
-  
+
   document.addEventListener('DOMContentLoaded', function(){{ 
     renderChart('BA');
   }}, false);
