@@ -15,14 +15,22 @@ template = """<!DOCTYPE html>
       flex-wrap: nowrap;
     }}
     .stocks-listing {{
-      width: 420px;
+      width: 440px;
       flex-wrap: nowrap;
       padding: 20px;
     }}
     .stocks-graph {{
       flex-wrap: nowrap;
       padding: 20px;
-    }}  
+    }}
+    .positive-movement {{
+      color: green;
+      font-weight: bold;
+    }}
+    .negative-movement {{
+      color: red;
+      font-weight: bold;
+    }}
   </style>
 </head>
 
@@ -60,7 +68,7 @@ template = """<!DOCTYPE html>
   function renderChart(symbol) {{
     new TradingView.widget(
     {{
-      "width": 980,
+      "width": 950,
       "height": 610,
       "symbol": symbol,
       "interval": "180",

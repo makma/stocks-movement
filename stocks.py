@@ -53,11 +53,12 @@ with open(resultsFileName, "a") as resultsFile:
 for result in stockResults:
     roundedPercentageMovement = np.round(result.percentageMovement, 2)
     print('{} {}%'.format(result.stockSymbol, roundedPercentageMovement))
+    percentageMovementClass = 'positive-movement' if (roundedPercentageMovement > 0) else 'negative-movement'
     tableBody += "<tr> \n"
     tableBody += '<td><button onclick="renderChart(`{}`)">{}</button></td> \n'.format(result.stockSymbol, result.stockSymbol)
-    tableBody += "<td>{}</td> \n".format(result.pastValue)
-    tableBody += "<td>{}</td> \n".format(result.nowValue) 
-    tableBody += "<td>{}%</td> \n".format(roundedPercentageMovement)  
+    tableBody += "<td>{}$</td> \n".format(result.pastValue)
+    tableBody += "<td>{}$</td> \n".format(result.nowValue) 
+    tableBody += "<td class='{}'>{}%</td> \n".format(percentageMovementClass, roundedPercentageMovement)  
     tableBody += "</tr> \n"
 
 with open(resultsFileName, "a") as resultsFile:
