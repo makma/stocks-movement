@@ -4,6 +4,7 @@ template = """<!DOCTYPE html>
   <meta charset="UTF-8">
   <title>Title of the document</title>
   <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css">
   <style>
     .tradingview-widget-container {{
       position: sticky;
