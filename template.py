@@ -15,7 +15,7 @@ template = """<!DOCTYPE html>
       flex-wrap: nowrap;
     }}
     .stocks-listing {{
-      width: 400px;
+      width: 420px;
       flex-wrap: nowrap;
       padding: 20px;
     }}
