@@ -15,11 +15,13 @@ template = """<!DOCTYPE html>
       flex-wrap: nowrap;
     }}
     .stocks-listing {{
-      width: 200px;
+      width: 400px;
       flex-wrap: nowrap;
+      padding: 20px;
     }}
     .stocks-graph {{
       flex-wrap: nowrap;
+      padding: 20px;
     }}  
   </style>
 </head>
@@ -28,7 +30,21 @@ template = """<!DOCTYPE html>
 {}
 <div class="stocks-view">
   <div class="stocks-listing">
-  {}
+
+    <table>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Begin</th>
+          <th>Today</th>
+          <th>Movement</th>
+        </tr>
+      </thead>
+      <tbody>
+        {}
+      </tbody>
+    </table>
+
   </div>
   <div class="stocks-graph"
   <!-- TradingView Widget BEGIN -->

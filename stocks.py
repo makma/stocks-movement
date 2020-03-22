@@ -14,9 +14,11 @@ stockSymbols = "FOXA MMM ABT ABBV ANF ATVI ADBE AAP AMD AFL A AIG APD AKAM ALXN 
 
 
 class stockResult():
-    def __init__(self, stockSymbol, percentageMovement):
+    def __init__(self, stockSymbol, pastValue, nowValue):
         self.stockSymbol = stockSymbol
-        self.percentageMovement = percentageMovement
+        self.pastValue = np.round(pastValue, 2)
+        self.nowValue = np.round(nowValue, 2)
+        self.percentageMovement = nowValue/pastValue*100-100
 
 
 @limits(calls=1, period=1) # slow down for rate limiting
@@ -34,32 +36,29 @@ beforeAndNow = allStocksData.Close.iloc[[0, -1]]
 stockResults = []
 
 for stockSymbol in stockSymbols.split():
-    beforeValue = beforeAndNow[stockSymbol][0]
+    pastValue = beforeAndNow[stockSymbol][0]
     nowValue = beforeAndNow[stockSymbol][1]
-    percentageMovement = nowValue/beforeValue*100-100
-    result = stockResult(stockSymbol, percentageMovement)
+    result = stockResult(stockSymbol, pastValue, nowValue)
     if not math.isnan(result.percentageMovement):
         stockResults.append(result)
 
 stockResults.sort(key=lambda x: x.percentageMovement)
 
 heading = ''
-documentBody = ''
+tableBody = ''
 
 with open(resultsFileName, "a") as resultsFile:
     heading += ('<h1>Diff between {} and {} generated at {} UTC</h1> \n'.format(startDate, endDate, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
-documentBody += "<ul> \n"
-
 for result in stockResults:
     roundedPercentageMovement = np.round(result.percentageMovement, 2)
     print('{} {}%'.format(result.stockSymbol, roundedPercentageMovement))
-
-    documentBody += "<li>"
-    documentBody += '<button onclick="renderChart(`{}`)">{}</button> {}%'.format(result.stockSymbol, result.stockSymbol, roundedPercentageMovement)
-    documentBody += "</li> \n"
-    
-documentBody += "</ul> \n"
+    tableBody += "<tr> \n"
+    tableBody += '<td><button onclick="renderChart(`{}`)">{}</button></td> \n'.format(result.stockSymbol, result.stockSymbol)
+    tableBody += "<td>{}</td> \n".format(result.pastValue)
+    tableBody += "<td>{}</td> \n".format(result.nowValue) 
+    tableBody += "<td>{}%</td> \n".format(roundedPercentageMovement)  
+    tableBody += "</tr> \n"
 
 with open(resultsFileName, "a") as resultsFile:
-    resultsFile.write(template.format(heading, documentBody))
+    resultsFile.write(template.format(heading, tableBody))
