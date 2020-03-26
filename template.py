@@ -15,7 +15,7 @@ template = """<!DOCTYPE html>
       flex-wrap: nowrap;
     }}
     .stocks-listing {{
-      width: 440px;
+      width: 650px;
       flex-wrap: nowrap;
       padding: 20px;
     }}
@@ -38,14 +38,15 @@ template = """<!DOCTYPE html>
 {}
 <div class="stocks-view">
   <div class="stocks-listing">
-
     <table>
       <thead>
         <tr>
           <th>Symbol</th>
-          <th>Begin</th>
+          <th>April 1 2019</th>
+          <th>Dec 2 2019</th>
           <th>Today</th>
-          <th>Movement</th>
+          <th>Movement against 4/1/2019</th>
+          <th>Movement against 12/2/2019</th>
         </tr>
       </thead>
       <tbody>
@@ -68,8 +69,8 @@ template = """<!DOCTYPE html>
   function renderChart(symbol) {{
     new TradingView.widget(
     {{
-      "width": 950,
-      "height": 610,
+      "width": 750,
+      "height": 500,
       "symbol": symbol,
       "interval": "180",
       "timezone": "Etc/UTC",
