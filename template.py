@@ -23,6 +23,12 @@ template = """<!DOCTYPE html>
       flex-wrap: nowrap;
       padding: 20px;
     }}
+    th.sticky-header {{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: white;
+    }}
     .positive-movement {{
       color: green;
       font-weight: bold;
@@ -41,12 +47,12 @@ template = """<!DOCTYPE html>
     <table>
       <thead>
         <tr>
-          <th>Symbol</th>
-          <th>April 1 2019</th>
-          <th>Dec 2 2019</th>
-          <th>Today</th>
-          <th>Movement against 4/1/2019</th>
-          <th>Movement against 12/2/2019</th>
+          <th class="sticky-header">Symbol</th>
+          <th class="sticky-header">April 1 2019</th>
+          <th class="sticky-header">Dec 2 2019</th>
+          <th class="sticky-header">Today</th>
+          <th class="sticky-header">Movement against April 1 2019</th>
+          <th class="sticky-header">Movement against Dec 2 2019</th>
         </tr>
       </thead>
       <tbody>

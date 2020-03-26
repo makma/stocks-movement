@@ -41,10 +41,10 @@ for stockSymbol in stockSymbols.split():
     secondPrice = allStocksData.Close[stockSymbol][secondDate]
     currentPrice = allStocksData.Close[stockSymbol][-1]
     result = stockResult(stockSymbol, firstPrice, secondPrice, currentPrice)
-    if not math.isnan(result.firstPercentageMovement):
+    if not math.isnan(result.secondPercentageMovement):
         stockResults.append(result)
 
-stockResults.sort(key=lambda x: x.firstPercentageMovement)
+stockResults.sort(key=lambda x: x.secondPercentageMovement)
 
 heading = ''
 tableBody = ''
