@@ -51,8 +51,8 @@ template = """<!DOCTYPE html>
           <th class="sticky-header">April 1 2019</th>
           <th class="sticky-header">Dec 2 2019</th>
           <th class="sticky-header">Today</th>
-          <th class="sticky-header">Movement from April 1 2019</th>
-          <th class="sticky-header">Movement from Dec 2 2019</th>
+          <th class="sticky-header">Movement since April 1 2019</th>
+          <th class="sticky-header">Movement since Dec 2 2019</th>
         </tr>
       </thead>
       <tbody>
