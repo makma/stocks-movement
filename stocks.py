@@ -33,7 +33,6 @@ def get_baknruptcy_probability(symbol):
         page = requests.get(get_probability_of_bankruptcy_url(stockSymbol))
         tree = html.fromstring(page.content)
         bankruptcyProbability = tree.xpath("//div[contains(@class, \'importantValue\')]/text()")[0]
-        print bankruptcyProbability
     except:
         bankruptcyProbability = "unknown"
     
