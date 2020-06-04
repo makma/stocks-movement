@@ -37,6 +37,9 @@ template = """<!DOCTYPE html>
       color: red;
       font-weight: bold;
     }}
+    .blue-category {{
+      background-color: lightsteelblue;
+    }}
   </style>
 </head>
 
