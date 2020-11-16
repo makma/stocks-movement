@@ -56,7 +56,6 @@ template = """<!DOCTYPE html>
           <th class="sticky-header">Today</th>
           <th class="sticky-header">Movement since April 1 2019</th>
           <th class="sticky-header">Movement since Dec 2 2019</th>
-          <th class="sticky-header">Bankruptcy probability</th>
         </tr>
       </thead>
       <tbody>
