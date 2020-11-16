@@ -17,29 +17,13 @@ stockSymbols = "FOXA TWOU MMM WUBA ABT ABBV ANF ATVI ADBE AAP AMD AES AFL A AGNC
 blueCategory = "QD CHS PBF CDEV NYMT CCL HEXO AAL APA BA GRPN OAS OXY ZM IVV AMC DAL XOM HTZ LUV HAL M DIS GILD CLNY TWTR AAPL MSFT GES SPG ERJ QEP CPE IVR CBL CDEV KOS GCI DO NCLH GE TWTR NBR LTM CRC CHK TELL AXP JPM TLRD MFA TGI SPCE WPG WLL DNR"
 
 class stockResult():
-    def __init__(self, stockSymbol, firstPrice, secondPrice, currentPrice, bankruptcyProbability):
+    def __init__(self, stockSymbol, firstPrice, secondPrice, currentPrice):
         self.stockSymbol = stockSymbol
         self.firstPrice = np.round(firstPrice, 2)
         self.secondPrice = np.round(secondPrice, 2)
         self.currentPrice = np.round(currentPrice, 2)
         self.firstPercentageMovement = np.round(currentPrice/firstPrice*100-100, 2)
         self.secondPercentageMovement = np.round(currentPrice/secondPrice*100-100, 2)
-        self.bankruptcyProbability = bankruptcyProbability
-
-def get_probability_of_bankruptcy_url(symbol):
-    return "https://www.macroaxis.com/invest/ratio/{}--Probability-Of-Bankruptcy".format(symbol)
-
-def get_baknruptcy_probability(symbol):
-    try:
-        page = requests.get(get_probability_of_bankruptcy_url(stockSymbol))
-        tree = html.fromstring(page.content)
-        bankruptcyProbability = tree.xpath("//div[contains(@class, \'importantValue\')]/text()")[0]
-    except:
-        bankruptcyProbability = "unknown"
-    
-    return bankruptcyProbability
-
-bankruptcyProbabilityUrlTemplate =  "https://www.macroaxis.com/invest/ratio/{}--Probability-Of-Bankruptcy"
 
 @limits(calls=1, period=1) # slow down for rate limiting
 def get_all_stocks_data():
@@ -58,8 +42,7 @@ for stockSymbol in stockSymbols.split():
     firstPrice = allStocksData.Close[stockSymbol][firstDate]
     secondPrice = allStocksData.Close[stockSymbol][secondDate]
     currentPrice = allStocksData.Close[stockSymbol][-1]
-    bankruptcyProbability = get_baknruptcy_probability(stockSymbol)
-    result = stockResult(stockSymbol, firstPrice, secondPrice, currentPrice, bankruptcyProbability)
+    result = stockResult(stockSymbol, firstPrice, secondPrice, currentPrice)
     if not math.isnan(result.secondPercentageMovement):
         stockResults.append(result)
 
@@ -82,8 +65,7 @@ for result in stockResults:
     tableBody += "<td>{}$</td> \n".format(result.secondPrice)
     tableBody += "<td>{}$</td> \n".format(result.currentPrice) 
     tableBody += "<td class='{}'>{}%</td> \n".format(firstPercentageMovementClass, result.firstPercentageMovement)
-    tableBody += "<td class='{}'>{}%</td> \n".format(secondPercentageMovementClass, result.secondPercentageMovement)
-    tableBody += "<td>{}</td> \n".format(result.bankruptcyProbability)     
+    tableBody += "<td class='{}'>{}%</td> \n".format(secondPercentageMovementClass, result.secondPercentageMovement)    
     tableBody += "</tr> \n"
 
 with open(resultsFileName, "a") as resultsFile:
